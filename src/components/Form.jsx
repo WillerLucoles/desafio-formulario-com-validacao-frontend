@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useFormValidation } from "../hooks/useFormValidation";
+import { validationSchema } from "../utils/validationSchema";
 
 const Form = () => {
   const [formData, setFormData] = useState({
@@ -6,7 +8,11 @@ const Form = () => {
     email: "",
     phone: "",
     role: "",
+    linkedIn: "",
+    github: "",
   });
+
+  const { errors, validate } = useFormValidation(validationSchema);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,9 +24,26 @@ const Form = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form data", formData);
-    // Save data locally
-    localStorage.setItem("formData", JSON.stringify(formData));
+
+    // Preencher automaticamente "https://" se não for fornecido
+    const updatedFormData = { ...formData };
+    if (updatedFormData.linkedIn && !updatedFormData.linkedIn.startsWith("http")) {
+      updatedFormData.linkedIn = "https://" + updatedFormData.linkedIn;
+    }
+    if (updatedFormData.github && !updatedFormData.github.startsWith("http")) {
+      updatedFormData.github = "https://" + updatedFormData.github;
+    }
+
+    console.log("Form data before validation:", updatedFormData);
+    const isValid = validate(updatedFormData);
+    if (isValid) {
+      console.log("Form data", updatedFormData);
+      localStorage.setItem("formData", JSON.stringify(updatedFormData));
+      alert("Cadastro realizado com sucesso!");
+    } else {
+      console.log("Validation errors:", errors);
+      alert("Falha ao cadastrar. Verifique os dados informados.");
+    }
   };
 
   return (
@@ -37,6 +60,7 @@ const Form = () => {
           value={formData.fullName}
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
+        {errors.fullName && <div className="text-red-500 text-xs italic">{errors.fullName}</div>}
       </div>
 
       <div className="mb-4">
@@ -51,6 +75,7 @@ const Form = () => {
           value={formData.email}
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
+        {errors.email && <div className="text-red-500 text-xs italic">{errors.email}</div>}
       </div>
 
       <div className="mb-4">
@@ -65,6 +90,7 @@ const Form = () => {
           value={formData.phone}
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
+        {errors.phone && <div className="text-red-500 text-xs italic">{errors.phone}</div>}
       </div>
 
       <div className="mb-4">
@@ -89,7 +115,43 @@ const Form = () => {
           <option value="UI/UX Designer" label="UI/UX Designer" />
           <option value="Analista de Sistemas" label="Analista de Sistemas" />
           <option value="Analista Programador" label="Analista Programador" />
+          <option value="DevOps Engineer" label="DevOps Engineer" />
+          <option value="Engenheiro de Dados" label="Engenheiro de Dados" />
+          <option value="QA Engineer" label="QA Engineer" />
+          <option value="Scrum Master" label="Scrum Master" />
+          <option value="Product Owner" label="Product Owner" />
         </select>
+        {errors.role && <div className="text-red-500 text-xs italic">{errors.role}</div>}
+      </div>
+
+      <div className="mb-4">
+        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="linkedIn">
+          LinkedIn
+        </label>
+        <input
+          id="linkedIn"
+          name="linkedIn"
+          type="text"
+          onChange={handleChange}
+          value={formData.linkedIn}
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        />
+        {errors.linkedIn && <div className="text-red-500 text-xs italic">{errors.linkedIn}</div>}
+      </div>
+
+      <div className="mb-4">
+        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="github">
+          GitHub
+        </label>
+        <input
+          id="github"
+          name="github"
+          type="text"
+          onChange={handleChange}
+          value={formData.github}
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        />
+        {errors.github && <div className="text-red-500 text-xs italic">{errors.github}</div>}
       </div>
 
       <div className="mb-4">
