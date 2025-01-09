@@ -24,8 +24,6 @@ const Form = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Preencher automaticamente "https://" se não for fornecido
     const updatedFormData = { ...formData };
     if (updatedFormData.linkedIn && !updatedFormData.linkedIn.startsWith("http")) {
       updatedFormData.linkedIn = "https://" + updatedFormData.linkedIn;
@@ -50,12 +48,13 @@ const Form = () => {
     <form onSubmit={handleSubmit} className="w-full max-w-lg">
       <div className="mb-4">
         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="fullName">
-          Nome completo
+          Nome completo:
         </label>
         <input
           id="fullName"
           name="fullName"
           type="text"
+          placeholder="Ex: Harry Potter"
           onChange={handleChange}
           value={formData.fullName}
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -65,12 +64,13 @@ const Form = () => {
 
       <div className="mb-4">
         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-          E-mail
+          E-mail;
         </label>
         <input
           id="email"
           name="email"
           type="email"
+          placeholder="exemplo@email.com"
           onChange={handleChange}
           value={formData.email}
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -80,12 +80,13 @@ const Form = () => {
 
       <div className="mb-4">
         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="phone">
-          Telefone
+          Telefone:
         </label>
         <input
           id="phone"
           name="phone"
           type="text"
+          placeholder="(11) 91234-5678"
           onChange={handleChange}
           value={formData.phone}
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -95,7 +96,7 @@ const Form = () => {
 
       <div className="mb-4">
         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="role">
-          Cargo pretendido
+          Cargo pretendido:
         </label>
         <select
           id="role"
@@ -126,12 +127,13 @@ const Form = () => {
 
       <div className="mb-4">
         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="linkedIn">
-          LinkedIn
+          Seu LinkedIn:
         </label>
         <input
           id="linkedIn"
           name="linkedIn"
           type="text"
+          placeholder="https://linkedin.com/in/seu-perfil"
           onChange={handleChange}
           value={formData.linkedIn}
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -141,12 +143,13 @@ const Form = () => {
 
       <div className="mb-4">
         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="github">
-          GitHub
+          Seu GitHub:
         </label>
         <input
           id="github"
           name="github"
           type="text"
+          placeholder="https://github.com/seu-usuario"
           onChange={handleChange}
           value={formData.github}
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
