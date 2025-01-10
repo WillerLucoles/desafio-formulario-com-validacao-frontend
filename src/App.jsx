@@ -19,7 +19,7 @@ function App() {
 
         <div className="w-full lg:w-1/2 flex flex-col justify-between px-4">
           <div className="flex flex-col items-center justify-center flex-grow">
-            <div className="text-center mb-8">
+            <div className="text-center mb-8 mt-16">
               <h1 className="text-2xl font-bold">Bem-vindo ao Front-end Fusion!</h1>
               <p className="text-gray-700 max-w-md mt-3">Preencha o formulário para dar o primeiro passo e entrar para nossa equipe.</p>
             </div>
