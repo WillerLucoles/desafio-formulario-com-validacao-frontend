@@ -2,6 +2,8 @@
 
 Este projeto consiste em um formulário de cadastro de membros para o projeto Frontend Fusion, desenvolvido utilizando React, validação de dados com Zod, e armazenamento local dos dados.
 
+![Mockup do Projeto](src/assets/MockupSite.png)
+
 ## Objetivo
 
 Desenvolver um formulário de cadastro de membros utilizando React, validação de dados com Zod, e salvando os dados localmente.
